@@ -1,0 +1,60 @@
+﻿@model _2106_Project.Models.LoginModel
+ 
+@{
+    ViewData["Title"] = "Guest login";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Guest Login</h1>
+</div>
+
+<div class="bgimg">
+
+@*<div align="center">
+    <h2> Account Management </h2>
+    <h3> Accounts </h3>
+    <table cellpadding="5" border="1">
+        <tr style="background-color:#808080; color:white;">
+            <td>Book Id</td>
+            <td>Book Title</td>
+            <td>Standard</td>
+        </tr>
+        @foreach (var account in Model)
+        {
+            <tr>
+                <td>@account.account_id </td>
+                <td>@account.Email</td>
+                <td>@account.Password</td>
+            </tr>
+        }
+    </table>
+</div> *@
+
+<section class="w3l-simple-contact-form2">
+    <div class="section-gap">
+        <div class="wrapper">
+            <div class="form-inner-cont">
+                @using (Html.BeginForm("Login","Login", FormMethod.Post , new { @class="signin-form" })){
+                <form class="signin-form">
+                    <h3>Login</h3>
+                    <div class="form-input">
+                        <label for="w3lSender">Email</label>
+                        @Html.TextBoxFor(x=>x.Email) 
+@*                        <input type="email" name="w3lSender" id="w3lSender" placeholder="Enter Your Email" required asp-for="Email"/>
+*@                   </div>
+                    <div class="form-input">
+                        <label for="w3lSubject">Password</label>
+                        @Html.PasswordFor(x=>x.Password, new {@class="form-control", name="w3lSubject" ,id="w3lSubject" , placeholder="Password"})
+@*                        <input type="password" name="w3lSubject" id="w3lSubject" placeholder="Enter Your Password" required asp-for="Password"/>
+*@                   </div>
+                    <button type="submit" value="Login" class="btn">Login</button>
+                </form>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,71 @@
+﻿@model _2106_Project.Models.SignUpModel
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<section class="w3l-simple-contact-form2">
+    <div class="section-gap">
+        <div class="wrapper">
+            <div class="form-inner-cont">
+                <form method="post" asp-action="SignUp" asp-controller="Account" class="signin-form">
+                    <h3>Sign Up</h3>
+                    <h5>Register as a Guest with us today!</h5>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-input">
+                                    <label for="w3lName">First Name</label>
+                                    <input type="text" name="Name" id="w3lName" placeholder="Enter your name" required="" asp-for="FirstName" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-input">
+                                    <label for="w3lName">Last Name</label>
+                                    <input type="text" name="Name" id="w3lName" placeholder="Enter your name" required="" asp-for="LastName" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-input">
+                                <label for="w3lMessage">Dath Of Birth</label>
+                                <input name="DOB" type="date" id="w3lMessage" placeholder="Type your query here" required="" asp-for="DOB" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col">
+                                <div class="form-input">
+                                <label for="w3lSender">Email</label>
+                                <input type="email" name="Email" id="w3lSender" placeholder="Enter your email" required="" asp-for="Email"/>
+                                </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                               <div class="form-input">
+                                     <label for="w3lSubject">Password</label>
+                                     <input type="password" name="Password" id="w3lSubject" placeholder="Enter password" required="" asp-for="Password"/>
+                               </div>
+                             </div>
+                             <div class="col">
+                                <div class="form-input">
+                                    <label for="w3lSubject">Confirm Password</label>
+                                    <input type="password" name="ConfirmPassword" id="w3lSubject" placeholder="Confirm password" required="" asp-for="ConfirmPassword"/>
+                                </div>     
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" value="SignUp" class="btn">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

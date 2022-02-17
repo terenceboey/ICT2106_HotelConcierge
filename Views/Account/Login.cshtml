@@ -1,0 +1,57 @@
+﻿@*@model IEnumerable<_2106_Project.Domain.Models.Account>
+*@
+@model _2106_Project.Models.LoginModel
+ 
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">SIGN UP PAGE</h1>
+</div>
+
+<div class="bgimg">
+
+@*<div align="center">
+    <h2> Account Management </h2>
+    <h3> Accounts </h3>
+    <table cellpadding="5" border="1">
+        <tr style="background-color:#808080; color:white;">
+            <td>Book Id</td>
+            <td>Book Title</td>
+            <td>Standard</td>
+        </tr>
+        @foreach (var account in Model)
+        {
+            <tr>
+                <td>@account.account_id </td>
+                <td>@account.Email</td>
+                <td>@account.Password</td>
+            </tr>
+        }
+    </table>
+</div> *@
+
+<section class="w3l-simple-contact-form2">
+    <div class="section-gap">
+        <div class="wrapper">
+            <div class="form-inner-cont">
+                <form method="post" asp-action="Login" asp-controller="Login" class="signin-form">
+                    <h3>Login</h3>
+                    <div class="form-input">
+                        <label for="w3lSender">Email</label>
+                        <input type="email" name="guestEmail" id="guestEmail" placeholder="Enter Your Email" required asp-for="Email"/>
+
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSubject">Password</label>
+                        <input type="password" name="guestPassword" id="guestPassword" placeholder="Enter Your Password" required asp-for="Password"/>
+                    </div>
+                    <button type="submit" value="Login" class="btn">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
