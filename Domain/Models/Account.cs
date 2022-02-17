@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace _2106_Project.Domain.Models
 {
+
     public class Account
     {
         [Key]

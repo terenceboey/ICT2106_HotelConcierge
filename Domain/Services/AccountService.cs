@@ -35,7 +35,7 @@ namespace _2106_Project.Domain.Services
 
         }
 
-        public void AddAccount(Account account, Guest guestDetails)
+        public void AddAccount(Account account)
         {
             if (account != null)
             {
@@ -78,9 +78,5 @@ namespace _2106_Project.Domain.Services
             _unitOfWork.Dispose();
         }
 
-        public void AddAccount(Account account)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

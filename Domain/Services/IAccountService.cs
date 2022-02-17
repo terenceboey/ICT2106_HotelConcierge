@@ -1,4 +1,5 @@
 ﻿using _2106_Project.Domain.Models;
+using _2106_Project.Models;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +10,7 @@ namespace _2106_Project.Domain.Services
         bool Login(Account account);
         List<Account> GetAllAccounts();
         Account GetAccountById(int account_id);
-        void AddAccount(Account account , Guest guest);
+        void AddAccount(SignUpModel account);
         void UpdateAccount(Account account);
         void DeleteAccount(int account_id);
     }
