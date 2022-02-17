@@ -28,18 +28,25 @@ namespace _2106_Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(SignUpModel SignUpModel)
+        public ActionResult SignUp(Account acc)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    accountService.AddAccount(SignUpModel);
+                    var firstName = HttpContext.Request.Form["first"];
+                    var lastName = HttpContext.Request.Form["last"];
+                    var dob = HttpContext.Request.Form["DOB"];
+                    var password = HttpContext.Request.Form["password"];
+                    var confirmpassword = HttpContext.Request.Form["confirmpassword"];
+
+                    /*                    accountService.AddAccount(SignUpModel);
+                    */
                     return RedirectToAction("Guest", "Login", new { area = "" });
                 }
                 else
                 {
-                    return View(SignUpModel);
+                    return View();
                 }
             }
             catch (Exception ex)
@@ -47,7 +54,7 @@ namespace _2106_Project.Controllers
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
                 TempData["Failed"] = "Failed";
             }
-            return View(SignUpModel);
+            return View();
         }
 
     }
