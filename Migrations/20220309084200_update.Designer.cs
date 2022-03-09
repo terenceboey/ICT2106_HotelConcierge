@@ -9,8 +9,8 @@ using _2106_Project.Data;
 namespace _2106_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220215160611_Guest Creation")]
-    partial class GuestCreation
+    [Migration("20220309084200_update")]
+    partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace _2106_Project.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.14");
 
-            modelBuilder.Entity("_2106_Project.Models.Guest", b =>
+            modelBuilder.Entity("_2106_Project.Domain.Models.Account", b =>
                 {
                     b.Property<Guid>("account_id")
                         .ValueGeneratedOnAdd()
@@ -27,10 +27,27 @@ namespace _2106_Project.Migrations
                     b.Property<string>("AccountStatus")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("account_id");
+
+                    b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("_2106_Project.Domain.Models.Guest", b =>
+                {
+                    b.Property<Guid>("account_id")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Email")
+                    b.Property<DateTime>("DOB")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -39,15 +56,12 @@ namespace _2106_Project.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("account_id");
 
                     b.ToTable("Guests");
                 });
 
-            modelBuilder.Entity("_2106_Project.Models.Hotel", b =>
+            modelBuilder.Entity("_2106_Project.Domain.Models.Hotel", b =>
                 {
                     b.Property<Guid>("hotel_id")
                         .ValueGeneratedOnAdd()
@@ -61,54 +75,57 @@ namespace _2106_Project.Migrations
                     b.ToTable("Hotels");
                 });
 
-            modelBuilder.Entity("_2106_Project.Models.Staff", b =>
+            modelBuilder.Entity("_2106_Project.Domain.Models.Staff", b =>
                 {
                     b.Property<Guid>("account_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AccountStatus")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Role")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("hotel_id")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("hotel_id1")
+                    b.Property<Guid?>("hotel_id")
                         .HasColumnType("TEXT");
 
                     b.HasKey("account_id");
 
-                    b.HasIndex("hotel_id1");
+                    b.HasIndex("hotel_id");
 
                     b.ToTable("Staffs");
                 });
 
-            modelBuilder.Entity("_2106_Project.Models.Staff", b =>
+            modelBuilder.Entity("_2106_Project.Domain.Models.Guest", b =>
                 {
-                    b.HasOne("_2106_Project.Models.Hotel", "Hotel")
+                    b.HasOne("_2106_Project.Domain.Models.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("hotel_id1");
+                        .HasForeignKey("account_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("_2106_Project.Domain.Models.Staff", b =>
+                {
+                    b.HasOne("_2106_Project.Domain.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("account_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_2106_Project.Domain.Models.Hotel", "Hotel")
+                        .WithMany()
+                        .HasForeignKey("hotel_id");
+
+                    b.Navigation("Account");
 
                     b.Navigation("Hotel");
                 });

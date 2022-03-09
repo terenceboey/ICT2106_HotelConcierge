@@ -26,6 +26,7 @@ namespace _2106_Project.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
@@ -39,7 +40,6 @@ namespace _2106_Project.Migrations
             modelBuilder.Entity("_2106_Project.Domain.Models.Guest", b =>
                 {
                     b.Property<Guid>("account_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
@@ -54,12 +54,7 @@ namespace _2106_Project.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("account_id1")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("account_id");
-
-                    b.HasIndex("account_id1");
 
                     b.ToTable("Guests");
                 });
@@ -81,15 +76,12 @@ namespace _2106_Project.Migrations
             modelBuilder.Entity("_2106_Project.Domain.Models.Staff", b =>
                 {
                     b.Property<Guid>("account_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
@@ -98,20 +90,12 @@ namespace _2106_Project.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("account_id1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("hotel_id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("hotel_id1")
+                    b.Property<Guid?>("hotel_id")
                         .HasColumnType("TEXT");
 
                     b.HasKey("account_id");
 
-                    b.HasIndex("account_id1");
-
-                    b.HasIndex("hotel_id1");
+                    b.HasIndex("hotel_id");
 
                     b.ToTable("Staffs");
                 });
@@ -120,7 +104,9 @@ namespace _2106_Project.Migrations
                 {
                     b.HasOne("_2106_Project.Domain.Models.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("account_id1");
+                        .HasForeignKey("account_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Account");
                 });
@@ -129,11 +115,13 @@ namespace _2106_Project.Migrations
                 {
                     b.HasOne("_2106_Project.Domain.Models.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("account_id1");
+                        .HasForeignKey("account_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("_2106_Project.Domain.Models.Hotel", "Hotel")
                         .WithMany()
-                        .HasForeignKey("hotel_id1");
+                        .HasForeignKey("hotel_id");
 
                     b.Navigation("Account");
 

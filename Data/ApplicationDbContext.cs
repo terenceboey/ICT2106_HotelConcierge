@@ -1,5 +1,7 @@
 ﻿using _2106_Project.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+
 namespace _2106_Project.Data
 {
     public class ApplicationDbContext : DbContext
@@ -12,6 +14,11 @@ namespace _2106_Project.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
+        }
+
+        internal object Find(object id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

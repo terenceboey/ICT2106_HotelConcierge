@@ -41,6 +41,7 @@ namespace _2106_Project
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IAccountService,AccountService>();
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IGuestRepository, GuestRepository>();
 
         }
 

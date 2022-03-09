@@ -28,7 +28,7 @@ namespace _2106_Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(Account acc)
+        public ActionResult SignUp(Account SignUpVM)
         {
             try
             {
@@ -37,11 +37,23 @@ namespace _2106_Project.Controllers
                     var firstName = HttpContext.Request.Form["first"];
                     var lastName = HttpContext.Request.Form["last"];
                     var dob = HttpContext.Request.Form["DOB"];
+                    var email = HttpContext.Request.Form["email"];
                     var password = HttpContext.Request.Form["password"];
                     var confirmpassword = HttpContext.Request.Form["confirmpassword"];
 
-                    /*                    accountService.AddAccount(SignUpModel);
-                    */
+                    if ( password == confirmpassword)
+                    {
+                        Account a = new Account();
+                        Guest g = new Guest();
+
+                        g.FirstName = firstName;
+                        g.LastName = lastName;
+                        g.DOB = Convert.ToDateTime(dob);
+                        a.Email = email;
+                        a.Password = password;
+                        accountService.AddAccount(a,g);
+                    }
+
                     return RedirectToAction("Guest", "Login", new { area = "" });
                 }
                 else

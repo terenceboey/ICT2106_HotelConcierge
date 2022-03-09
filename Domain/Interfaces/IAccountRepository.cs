@@ -9,7 +9,7 @@ namespace _2106_Project.Domain.Interfaces
     {
         List<Account> GetAllAccounts();
         Account GetAccountById(int account_id);
-        void AddAccount(Account account);
+        Guid AddAccount(Account account);
         void UpdateAccount(Account account);
         void DeleteAccount(int account_id);
         Account CheckEmail(string email);

@@ -1,6 +1,7 @@
 ﻿using _2106_Project.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace _2106_Project.Domain.Interfaces
@@ -12,5 +13,6 @@ namespace _2106_Project.Domain.Interfaces
         void Insert(T entity);
         void Update(T entity);
         void Delete(object entity);
+        IEnumerable<T> Find (Expression<Func<T, bool>> expression);  
     }
 }

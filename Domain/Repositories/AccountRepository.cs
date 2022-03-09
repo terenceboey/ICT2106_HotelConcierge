@@ -19,14 +19,18 @@ namespace _2106_Project.Domain.Repositories
         {
             _context = context;
         }
-        public void AddAccount(Account account)
+        public Guid AddAccount(Account account)
         {
             if (account != null)
             {
                 account.Password = BCryptNet.HashPassword(account.Password);
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
+
+                return account.account_id;
             }
+
+            return Guid.Empty;
         }
 
         public Account CheckEmail(string email)
@@ -39,6 +43,10 @@ namespace _2106_Project.Domain.Repositories
             throw new NotImplementedException();
         }
 
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
         public void Dispose()
         {
             _context.Dispose();
@@ -60,36 +68,4 @@ namespace _2106_Project.Domain.Repositories
         }
     }
 
-    /*        public override async Task<IEnumerable<Account>> All()
-        {
-            try
-            {
-                return await dbSet.ToListAsync();
-            }
-            catch ( Exception ex)
-            {
-                _logger.LogError(ex,"{Repo} All method error", typeof(AccountRepository));
-            }
-        }
-
-        public override async Task<bool> Upsert(Account entity)
-        {
-            try
-            {
-                var existingUser = await dbSet.Where(x => x.account_id == entity.account_id).FirstOrDefaultAsync();
-
-                if (existingUser == null)
-                    return await Add(entity);
-
-                existingUser.Email = entity.Email;
-                existingUser.Password = entity.Password;
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "{Repo} Upsert method error", typeof(AccountRepository));
-                return false;
-            }
-        }*/
 }

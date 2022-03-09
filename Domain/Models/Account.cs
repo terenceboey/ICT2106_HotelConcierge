@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace _2106_Project.Domain.Models
@@ -8,10 +9,12 @@ namespace _2106_Project.Domain.Models
     {
         [Key]
         public Guid account_id { get; set; }
+        [Required]
         public string Email { get; set; }
-
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string AccountStatus { get; set; }
+
+
     }
 }

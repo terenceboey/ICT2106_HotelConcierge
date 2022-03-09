@@ -20,8 +20,7 @@ namespace _2106_Project.Domain.UnitWork
         }
         public IGenericRepository<Account> AccountRepository
         {
-/*            get { return this.accountRepository ??= new GenericRepository<Account>(_context); }
-*/            get
+            get
             {
                 if (this.accountRepository == null)
                 {

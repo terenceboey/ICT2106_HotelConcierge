@@ -1,5 +1,6 @@
 ﻿using _2106_Project.Domain.Interfaces;
 using _2106_Project.Domain.Models;
+using System;
 using System.Collections.Generic;
 using BCryptNet = BCrypt.Net.BCrypt;
 
@@ -10,11 +11,13 @@ namespace _2106_Project.Domain.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAccountRepository _account;
+        private readonly IGuestRepository _guest;
 
-        public AccountService(IUnitOfWork unitOfWork , IAccountRepository account)
+        public AccountService(IUnitOfWork unitOfWork , IAccountRepository account , IGuestRepository guest)
         {
             this._unitOfWork = unitOfWork;
             this._account = account;
+            this._guest = guest;
 
         }
 
@@ -26,8 +29,6 @@ namespace _2106_Project.Domain.Services
                 /*                var user = _unitOfWork.AccountRepository.GetById(account.Email);
                  *                
                 */
-                var abc = account.Password;
-                var abca = account.Email;
                 var user = _account.CheckEmail(account.Email);
                 verified = BCryptNet.Verify(account.Password, user.Password);
             }
@@ -35,19 +36,27 @@ namespace _2106_Project.Domain.Services
 
         }
 
-        public void AddAccount(Account account)
+        public void AddAccount(Account account, Guest guest, Staff staff)
         {
             if (account != null)
             {
                 account.Password = BCryptNet.HashPassword(account.Password);
                 account.AccountStatus = "Pending Verification";
-                _unitOfWork.AccountRepository.Insert(account);
+                Guid ai = _account.AddAccount(account);
+                if ( guest != null)
+                {
+                    guest.account_id = ai;
+                    _unitOfWork.GuestRepository.Insert(guest);
+
+                }
+
+                if(staff != null)
+                {
+
+                }
+
                 _unitOfWork.Save();
                 _unitOfWork.Dispose();
-                /*                var id = account.account_id;
-                                var text = guestDetails.FirstName;
-                                var textt = guestDetails.LastName;
-                                var texttt = guestDetails.DOB;*/
 
             }
         }
